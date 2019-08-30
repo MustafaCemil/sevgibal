@@ -38,8 +38,8 @@ public class ArilarServiceImpl implements ArilarService {
     @Override
     public Page<ArilarDto> listele(Pageable pageable) {
         Page<Arilar> arilar = arilarRepository.findAll(pageable);
-        List<ArilarDto> arilarDto = Arrays.asList(modelMapper.map(arilar.getContent(), ArilarDto.class));
-        return new PageImpl<ArilarDto>(arilarDto,pageable,arilar.getTotalPages());
+        ArilarDto[] arilarDto = modelMapper.map(arilar.getContent(), ArilarDto[].class);
+        return new PageImpl<ArilarDto>(Arrays.asList(arilarDto),pageable,arilar.getTotalPages());
     }
 
     @Override
