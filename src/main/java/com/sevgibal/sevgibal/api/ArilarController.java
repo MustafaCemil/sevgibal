@@ -25,8 +25,7 @@ public class ArilarController {
     @RequestMapping(value = "/listeleme",  method = RequestMethod.GET)
     public ResponseEntity<Page<ArilarDto>> listeleme(Pageable pageable){
         try {
-            Page<ArilarDto> data = (Page<ArilarDto>) arilarService.listele(pageable);
-            return new ResponseEntity(data,HttpStatus.OK);
+            return new ResponseEntity(arilarService.listele(pageable), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
