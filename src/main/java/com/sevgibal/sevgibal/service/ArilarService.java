@@ -1,6 +1,7 @@
 package com.sevgibal.sevgibal.service;
 
 import com.sevgibal.sevgibal.dto.ArilarDto;
+import com.sevgibal.sevgibal.entity.Arilar;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

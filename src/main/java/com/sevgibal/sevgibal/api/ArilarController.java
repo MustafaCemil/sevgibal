@@ -1,7 +1,11 @@
 package com.sevgibal.sevgibal.api;
 
 import com.sevgibal.sevgibal.dto.ArilarDto;
+import com.sevgibal.sevgibal.entity.Arilar;
 import com.sevgibal.sevgibal.service.ArilarService;
+import com.sevgibal.sevgibal.util.TPage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,16 @@ public class ArilarController {
 
     public ArilarController(ArilarService arilarService){
         this.arilarService = arilarService;
+    }
+
+    @RequestMapping(value = "/listeleme",  method = RequestMethod.GET)
+    public ResponseEntity<Page<ArilarDto>> listeleme(Pageable pageable){
+        try {
+            Page<ArilarDto> data = (Page<ArilarDto>) arilarService.listele(pageable);
+            return new ResponseEntity(data,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/ekleme",method = RequestMethod.POST)

@@ -6,8 +6,13 @@ import com.sevgibal.sevgibal.repository.ArilarRepository;
 import com.sevgibal.sevgibal.service.ArilarService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 @Service
 public class ArilarServiceImpl implements ArilarService {
@@ -20,9 +25,21 @@ public class ArilarServiceImpl implements ArilarService {
         this.modelMapper = modelMapper;
     }
 
+    /*
+    @Override
+    public TPage<ArilarDto> listele(Pageable pageable) {
+        Page<Arilar> data = arilarRepository.findAll(pageable);
+        TPage<ArilarDto> tpage = new TPage();
+        tpage.setStat(data, Arrays.asList(modelMapper.map(data.getContent(),ArilarDto[].class)));
+        return tpage;
+    }
+    */
+
     @Override
     public Page<ArilarDto> listele(Pageable pageable) {
-        return null;
+        Page<Arilar> arilar = arilarRepository.findAll(pageable);
+        ArilarDto[] arilarDto = modelMapper.map(arilar.getContent(), ArilarDto[].class);
+        return new PageImpl<ArilarDto>(Arrays.asList(arilarDto),pageable,arilar.getTotalPages());
     }
 
     @Override
