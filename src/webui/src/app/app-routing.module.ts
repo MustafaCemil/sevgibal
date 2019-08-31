@@ -5,7 +5,12 @@ import {AppComponent} from "./app.component";
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'issue' },
+      { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
+      { path: 'issue', loadChildren: './pages/issue/issue.module#IssueModule' },
+      { path: 'project', loadChildren: './pages/project/project.module#ProjectModule' }
+    ]
   }
 ];
 
